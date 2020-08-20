@@ -4,7 +4,12 @@ import com.tttxdxd.game.Engine;
 import com.tttxdxd.game.GameObject;
 import com.tttxdxd.game.Vector;
 
+import java.awt.event.KeyEvent;
+
 public class Tank extends GameObject {
+
+    private boolean moving = false;
+    private Dir dir = Dir.Up;
 
     public Tank(int x, int y) {
         super(x, y);
@@ -17,19 +22,27 @@ public class Tank extends GameObject {
 
         Engine engine = Engine.getInstance();
 
-        if (!engine.bL && !engine.bR && !engine.bU && !engine.bD) {
-            rigidBody.velocity = Vector.Zero.Clone();
-            return;
-        }
+        if (engine.operations.isEmpty()) {
+            this.rigidBody.velocity = Vector.Zero.Clone();
+        } else {
+            Integer code = engine.operations.get(engine.operations.size() - 1);
 
-        if (engine.bL) {
-            rigidBody.velocity = Vector.Left.Clone();
-        } else if (engine.bR) {
-            rigidBody.velocity = Vector.Right.Clone();
-        } else if (engine.bU) {
-            rigidBody.velocity = Vector.Up.Clone();
-        } else if (engine.bD) {
-            rigidBody.velocity = Vector.Down.Clone();
+            switch (code) {
+                case KeyEvent.VK_UP:
+                    this.rigidBody.velocity = Vector.Up.Clone();
+                    break;
+                case KeyEvent.VK_DOWN:
+                    this.rigidBody.velocity = Vector.Down.Clone();
+                    break;
+                case KeyEvent.VK_LEFT:
+                    this.rigidBody.velocity = Vector.Left.Clone();
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    this.rigidBody.velocity = Vector.Right.Clone();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

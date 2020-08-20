@@ -56,18 +56,16 @@ public class Render extends Frame {
     class MyKeyListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
-            switch (e.getKeyCode()) {
+            Integer code = e.getKeyCode();
+
+            switch (code) {
                 case KeyEvent.VK_UP:
-                    Engine.getInstance().bU = true;
-                    break;
                 case KeyEvent.VK_DOWN:
-                    Engine.getInstance().bD = true;
-                    break;
                 case KeyEvent.VK_LEFT:
-                    Engine.getInstance().bL = true;
-                    break;
                 case KeyEvent.VK_RIGHT:
-                    Engine.getInstance().bR = true;
+                    if (!Engine.getInstance().operations.contains(code)) {
+                        Engine.getInstance().operations.add(code);
+                    }
                     break;
                 default:
                     break;
@@ -76,18 +74,14 @@ public class Render extends Frame {
 
         @Override
         public void keyReleased(KeyEvent e) {
-            switch (e.getKeyCode()) {
+            Integer code = e.getKeyCode();
+
+            switch (code) {
                 case KeyEvent.VK_UP:
-                    Engine.getInstance().bU = false;
-                    break;
                 case KeyEvent.VK_DOWN:
-                    Engine.getInstance().bD = false;
-                    break;
                 case KeyEvent.VK_LEFT:
-                    Engine.getInstance().bL = false;
-                    break;
                 case KeyEvent.VK_RIGHT:
-                    Engine.getInstance().bR = false;
+                    Engine.getInstance().operations.remove(code);
                     break;
                 default:
                     break;

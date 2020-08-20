@@ -17,6 +17,7 @@ public class Engine {
         render = new Render(width, height);
     }
 
+    public List<Integer> operations = new ArrayList<>();
     private Render render;
 
     public int width, height;

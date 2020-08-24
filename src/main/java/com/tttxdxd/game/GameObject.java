@@ -1,12 +1,23 @@
 package com.tttxdxd.game;
 
+import com.tttxdxd.tank.Layer;
+
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class GameObject {
     public Transform transform;
     public RigidBody rigidBody;
+    public Sprite sprite = null;
+    public Layer layer = Layer.Normal;
 
     private boolean active = false;
+
+    public GameObject(float x, float y) {
+        transform = new Transform(x, y);
+        rigidBody = new RigidBody();
+        Awake();
+    }
 
     public GameObject(int x, int y) {
         transform = new Transform(x, y);
@@ -26,6 +37,10 @@ public class GameObject {
 
     }
 
+    protected void onCollision(GameObject object){
+
+    }
+
     public void Update(float deltaTime) {
         rigidBody.Update(deltaTime);
         transform.position.Add(rigidBody.velocity);
@@ -37,7 +52,11 @@ public class GameObject {
         int w = (int) (transform.size.x);
         int h = (int) (transform.size.y);
 
-        g.fillRect(x, y, w, h);
+        if (sprite == null) {
+            g.fillRect(x, y, w, h);
+        } else {
+            sprite.Draw(g, x, y);
+        }
     }
 
     public void setActive(boolean active) {

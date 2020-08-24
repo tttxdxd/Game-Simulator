@@ -6,7 +6,7 @@ import java.io.InputStream;
 
 public class ResourceManager {
 
-    public BufferedImage LoadImage(String url) {
+    public static BufferedImage LoadImage(String url) {
         BufferedImage res = null;
 
         try {

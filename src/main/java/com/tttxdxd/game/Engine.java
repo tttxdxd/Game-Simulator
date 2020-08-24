@@ -25,6 +25,8 @@ public class Engine {
     public float fps = 60;
     public boolean fixed = false;
 
+    public boolean hit;
+
     private long now = System.currentTimeMillis();
 
     private List<GameObject> gameObjectList = new ArrayList<>();
@@ -47,6 +49,17 @@ public class Engine {
 
         for (int i = gameObjectList.size() - 1; i >= 0; i--) {
             GameObject object = gameObjectList.get(i);
+
+            for (int j = i - 1; j >= 0; j--) {
+                GameObject ano = gameObjectList.get(j);
+
+                // 碰撞检测
+                if (Math.abs(object.transform.position.x - ano.transform.position.x) * 2 < object.transform.size.x + ano.transform.size.x
+                &&Math.abs(object.transform.position.y - ano.transform.position.y) * 2 < object.transform.size.y + ano.transform.size.y) {
+                    object.onCollision(ano);
+                    ano.onCollision(object);
+                }
+            }
 
             object.Update(deltaTime);
             if (!object.getActive()) {

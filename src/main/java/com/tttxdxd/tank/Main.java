@@ -5,9 +5,12 @@ import com.tttxdxd.game.GameObject;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        new Tank(200, 200);
+        new MainTank(200, 200);
 
+        for (int i = 0; i < 4; i++) {
 
+            new Tank(100+i*100,500);
+        }
         Engine.getInstance().Start();
     }
 }

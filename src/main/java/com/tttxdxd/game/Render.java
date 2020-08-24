@@ -48,7 +48,7 @@ public class Render extends Frame {
     @Override
     public void paint(Graphics g) {
         g.setColor(Color.WHITE);
-        g.drawString(Engine.getInstance().fps + "", 20, 40);
+        g.drawString("fps: "+Engine.getInstance().fps + "", 20, 40);
 
         Engine.getInstance().Draw(g);
     }
@@ -67,6 +67,9 @@ public class Render extends Frame {
                         Engine.getInstance().operations.add(code);
                     }
                     break;
+                case KeyEvent.VK_SPACE:
+                    Engine.getInstance().hit=true;
+                    break;
                 default:
                     break;
             }
@@ -82,6 +85,9 @@ public class Render extends Frame {
                 case KeyEvent.VK_LEFT:
                 case KeyEvent.VK_RIGHT:
                     Engine.getInstance().operations.remove(code);
+                    break;
+                case KeyEvent.VK_SPACE:
+                    Engine.getInstance().hit = false;
                     break;
                 default:
                     break;

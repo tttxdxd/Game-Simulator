@@ -1,9 +1,6 @@
 package com.tttxdxd.game;
 
-import com.tttxdxd.tank.Layer;
-
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class GameObject {
     public Transform transform;
@@ -37,12 +34,17 @@ public class GameObject {
 
     }
 
-    protected void onCollision(GameObject object){
+    protected void onCollision(GameObject object) {
 
     }
 
-    public void Update(float deltaTime) {
+    protected void onUpdate(float deltaTime) {
+
+    }
+
+    public void update(float deltaTime) {
         rigidBody.Update(deltaTime);
+        onUpdate(deltaTime);
         transform.position.Add(rigidBody.velocity);
     }
 

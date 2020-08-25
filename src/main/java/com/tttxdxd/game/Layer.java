@@ -1,7 +1,8 @@
-package com.tttxdxd.tank;
+package com.tttxdxd.game;
 
 public enum  Layer {
     Normal,
+    Wall,
     Player,
     Enemy
 }

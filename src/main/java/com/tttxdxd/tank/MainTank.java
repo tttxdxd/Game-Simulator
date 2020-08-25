@@ -1,6 +1,7 @@
 package com.tttxdxd.tank;
 
 import com.tttxdxd.game.Engine;
+import com.tttxdxd.game.Layer;
 import com.tttxdxd.game.Vector;
 
 import java.awt.*;
@@ -17,8 +18,7 @@ public class MainTank extends Tank {
     }
 
     @Override
-    public void Update(float deltaTime) {
-        super.Update(deltaTime);
+    public void onUpdate(float deltaTime) {
 
         Engine engine = Engine.getInstance();
 
@@ -63,6 +63,8 @@ public class MainTank extends Tank {
                 System.out.println(_lastFileTime);
             }
         }
+
+        super.onUpdate(deltaTime);
     }
 
     @Override

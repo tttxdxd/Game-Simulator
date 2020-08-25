@@ -2,13 +2,11 @@ package com.tttxdxd.tank;
 
 import com.tttxdxd.game.*;
 
-import java.awt.event.KeyEvent;
-
 public class Tank extends GameObject {
 
     protected boolean moving = false;
     protected Dir dir = Dir.Up;
-    protected float speed = 0.2f;
+    protected float speed = 0.5f;
 
     public Tank(int x, int y) {
         super(x, y);
@@ -50,5 +48,24 @@ public class Tank extends GameObject {
     public void Destroy() {
         super.Destroy();
         new Explode(transform.position.x, transform.position.y);
+    }
+
+    @Override
+    public void onUpdate(float deltaTime) {
+        if (transform.position.x <= transform.size.x/2) {
+            rigidBody.velocity.x = Math.max(0, rigidBody.velocity.x);
+        }
+
+        if (transform.position.y <= transform.size.y/2) {
+            rigidBody.velocity.y = Math.max(0, rigidBody.velocity.y);
+        }
+
+        if (transform.position.x + transform.size.x/2 >= Engine.getInstance().width) {
+            rigidBody.velocity.x = Math.min(0, rigidBody.velocity.x);
+        }
+
+        if (transform.position.y + transform.size.y >= Engine.getInstance().height) {
+            rigidBody.velocity.y = Math.min(0, rigidBody.velocity.y);
+        }
     }
 }

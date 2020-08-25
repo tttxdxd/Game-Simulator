@@ -1,6 +1,7 @@
 package com.tttxdxd.tank;
 
 import com.tttxdxd.game.GameObject;
+import com.tttxdxd.game.Layer;
 import com.tttxdxd.game.Sprite;
 import com.tttxdxd.game.Vector;
 
@@ -39,7 +40,8 @@ public class Bullet extends GameObject {
 
     @Override
     protected void onCollision(GameObject object) {
-        if (layer != object.layer) {
+        if ((layer == Layer.Player && object.layer == Layer.Enemy)
+                || (layer == Layer.Enemy && object.layer == Layer.Player)) {
             this.Destroy();
             object.Destroy();
         }

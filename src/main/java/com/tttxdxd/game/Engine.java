@@ -32,7 +32,6 @@ public class Engine {
     private List<GameObject> gameObjectList = new ArrayList<>();
 
     public void Start() throws InterruptedException {
-
         while (true) {
             long time = System.currentTimeMillis();
             float span = (time - now) * 0.001f;
@@ -50,18 +49,18 @@ public class Engine {
         for (int i = gameObjectList.size() - 1; i >= 0; i--) {
             GameObject object = gameObjectList.get(i);
 
+            object.update(deltaTime);
             for (int j = i - 1; j >= 0; j--) {
                 GameObject ano = gameObjectList.get(j);
 
                 // 碰撞检测
                 if (Math.abs(object.transform.position.x - ano.transform.position.x) * 2 < object.transform.size.x + ano.transform.size.x
-                &&Math.abs(object.transform.position.y - ano.transform.position.y) * 2 < object.transform.size.y + ano.transform.size.y) {
+                        && Math.abs(object.transform.position.y - ano.transform.position.y) * 2 < object.transform.size.y + ano.transform.size.y) {
                     object.onCollision(ano);
                     ano.onCollision(object);
                 }
             }
 
-            object.Update(deltaTime);
             if (!object.getActive()) {
                 gameObjectList.remove(i);
             }
